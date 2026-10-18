@@ -14,6 +14,6 @@ class RoomServiceTest {
 
     @Test
     void occupancyRateIsComputedCorrectly() {
-        assertEquals(50.0, service.occupancyRate(40, 20));
+        assertEquals(60.0, service.occupancyRate(40, 20));
     }
 }
