@@ -11,7 +11,7 @@ import ma.ensak.smartcampus.user.UserRepository;
 @Service
 public class LoginService {
 
-    public static final String ERROR_MESSAGE = "E-mail ou mot de passe incorrect";
+    public static final String ERROR_MESSAGE = "Identifiants invalides";
     private static final String DOMAIN = "@usms.ac.ma";
 
     private final UserRepository users;
