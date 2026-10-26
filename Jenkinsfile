@@ -19,12 +19,11 @@ pipeline {
                 sh 'mvn -B test'
             }
         }
-        post {
-            success {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            }
-    }
     }
 
-    
+    post {
+        success {
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+        }
+    }
 }
