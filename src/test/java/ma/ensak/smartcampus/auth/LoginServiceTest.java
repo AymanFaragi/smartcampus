@@ -70,7 +70,7 @@ class LoginServiceTest {
     void motDePasseStockeSousFormeDeHash() {
         String email = newAccount(true);
         String hash = users.findByEmailIgnoreCase(email).orElseThrow().getPasswordHash();
-        assertThat(hash).isNotEqualTo("Secret123").startsWith("$2");
+        assertThat(hash).isNotEqualTo("Secret123").startsWith("$3");
     }
 
     @Test
