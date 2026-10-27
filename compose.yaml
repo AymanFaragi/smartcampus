@@ -1,0 +1,39 @@
+services:
+  api:
+    build: .
+    image: smartcampus:1.0
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/smartcampus
+      - DB_USER=smartcampus
+      - DB_PASSWORD=smartcampus
+      - DDL_AUTO=update
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  db:
+    image: postgres:13                 
+    environment:
+      - POSTGRES_DB=smartcampus
+      - POSTGRES_USER=smartcampus
+      - POSTGRES_PASSWORD=smartcampus
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "smartcampus", "-d", "smartcampus"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:
